@@ -31,7 +31,7 @@ resource "aws_subnet" "public_subnet" {
   tags =  merge (
     var.pubsub_tags ,
     local.common_tags,{
-        Name ="${local.common_name}-public-${split("-",local.az_names[count.index])[2]})"
+        Name ="${local.common_name}-public-${split("-",local.az_names[count.index])[2]}"
     }
   )
 }
@@ -45,7 +45,7 @@ resource "aws_subnet" "private_subnet" {
   tags =  merge (
     var.privatesub_tags ,
     local.common_tags,{
-        Name ="${local.common_name}-private-${split("-",local.az_names[count.index])[2]})"
+        Name ="${local.common_name}-private-${split("-",local.az_names[count.index])[2]}"
     }
   )
 }
@@ -59,7 +59,7 @@ resource "aws_subnet" "database_subnet" {
   tags =  merge (
     var.datasub_tags ,
     local.common_tags,{
-        Name ="${local.common_name}-data-${split("-",local.az_names[count.index])[2]})"
+        Name ="${local.common_name}-database-${split("-",local.az_names[count.index])[2]}"
     }
   )
 }
