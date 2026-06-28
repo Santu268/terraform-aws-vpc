@@ -1,5 +1,5 @@
 resource "aws_vpc_peering_connection" "main" {
-  count = is_peering_required ? 1 : 0  
+  count = var.is_peering_required ? 1 : 0  
   peer_vpc_id   = data.aws_vpc.default.id
   vpc_id        = aws_vpc.main.id
   auto_accept   = true
@@ -19,21 +19,21 @@ resource "aws_vpc_peering_connection" "main" {
 }
 
 resource "aws_route" "public_peering" {
-  count = is_peering_required ? 1 : 0   
+  count = var.is_peering_required ? 1 : 0   
   route_table_id            = aws_route_table.public_subnet.id
   destination_cidr_block    = local.default_cidr
   vpc_peering_connection_id = aws_vpc_peering_connection.main.id
 }
 
 resource "aws_route" "private_peering" {
-  count = is_peering_required ? 1 : 0   
+  count = var.is_peering_required ? 1 : 0   
   route_table_id            = aws_route_table.private_subnet.id
   destination_cidr_block    = local.default_cidr
   vpc_peering_connection_id = aws_vpc_peering_connection.main.id
 }
 
 resource "aws_route" "database_peering" {
-  count = is_peering_required ? 1 : 0   
+  count = var.is_peering_required ? 1 : 0   
   route_table_id            = aws_route_table.database_subnet.id
   destination_cidr_block    = local.default_cidr
   vpc_peering_connection_id = aws_vpc_peering_connection.main.id
@@ -41,7 +41,7 @@ resource "aws_route" "database_peering" {
 
 
 resource "aws_route" "default" {
-  count = is_peering_required ? 1 : 0   
+  count = var.is_peering_required ? 1 : 0   
   route_table_id            = data.aws_route_table.default_vpc_route_table.id
   destination_cidr_block    = local.my_cidr
   vpc_peering_connection_id = aws_vpc_peering_connection.main.id

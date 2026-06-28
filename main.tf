@@ -50,7 +50,7 @@ resource "aws_subnet" "private_subnet" {
   )
 }
 
-resource "aws_subnet" "databse_subnet" {
+resource "aws_subnet" "database_subnet" {
   count = length(var.datasub_cidr)
   vpc_id     = aws_vpc.main.id
   cidr_block = var.datasub_cidr[count.index]
@@ -64,7 +64,7 @@ resource "aws_subnet" "databse_subnet" {
   )
 }
 
-resource "aws_route_table" "public_subnet" {
+resource "aws_route_table" "public" {
   vpc_id = aws_vpc.main.id
 
 
@@ -76,7 +76,7 @@ resource "aws_route_table" "public_subnet" {
   )
 }
 
-resource "aws_route_table" "private_subnet" {
+resource "aws_route_table" "private" {
   vpc_id = aws_vpc.main.id
 
 
@@ -88,7 +88,7 @@ resource "aws_route_table" "private_subnet" {
   )
 }
 
-resource "aws_route_table" "database_subnet" {
+resource "aws_route_table" "database" {
   vpc_id = aws_vpc.main.id
 
 
