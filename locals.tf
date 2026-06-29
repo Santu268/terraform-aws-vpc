@@ -3,7 +3,7 @@ locals {
         Project = var.project
         Env = var.env
         Name = local.common_name
-        terraform = true
+        Terraform = true
     }
 
     common_name = "${var.project}-${var.env}" # roboshop-dev
